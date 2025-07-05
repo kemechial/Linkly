@@ -6,9 +6,12 @@ pydantic
 python-jose[cryptography]
 python-slugify
 redis
-request
 requests
 sqlalchemy
 uvicorn
 uvicorn[standard]
-venv
+pydantic[email]
+python-multipart
+pytest
+httpx
+

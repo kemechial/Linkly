@@ -1,4 +1,4 @@
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, HttpUrl, EmailStr, ConfigDict
 from datetime import datetime
 
 class LinkCreate(BaseModel):
@@ -11,9 +11,22 @@ class LinkRead(BaseModel):
     created_at: datetime
     clicks: int
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class LinkStats(BaseModel):
     short_key: str
     clicks: int
+
+
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str
+
+class UserOut(BaseModel):
+    id: int
+    email: EmailStr
+    model_config = ConfigDict(from_attributes=True)
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
