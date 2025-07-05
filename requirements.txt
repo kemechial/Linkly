@@ -1,0 +1,14 @@
+fastapi
+flask
+passlib[bcrypt]
+psycopg2-binary
+pydantic
+python-jose[cryptography]
+python-slugify
+redis
+request
+requests
+sqlalchemy
+uvicorn
+uvicorn[standard]
+venv
