@@ -35,3 +35,11 @@ def get_link_stats(db: Session, short_key: str):
 
 def get_link_by_short_key(db: Session, short_key: str):
     return db.query(models.Link).filter_by(short_key=short_key).first()
+
+def get_link_and_increment_clicks(db: Session, short_key: str) -> models.Link | None:
+    db_link = db.query(models.Link).filter_by(short_key=short_key).first()
+    if db_link:
+        db_link.clicks += 1
+        db.commit()
+        db.refresh(db_link)
+    return db_link

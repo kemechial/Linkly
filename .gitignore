@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-linkly-venv/
+
 
 # C extensions
 *.so
@@ -76,6 +76,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+linkly-venv/
 
 # macOS
 .DS_Store

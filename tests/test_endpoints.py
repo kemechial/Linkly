@@ -70,3 +70,18 @@ def test_link_stats():
     data = response.json()
     assert data["short_key"] == short_key
     assert "clicks" in data
+
+
+def test_redirect_short_link():
+    token = get_token()
+    headers = {"Authorization": f"Bearer {token}"}
+    # Create a link first
+    create_response = client.post("/links/", json={"target_url": "https://example.com/redirect_test"}, headers=headers)
+    assert create_response.status_code == 201
+    short_key = create_response.json()["short_key"]
+
+    # Now test the redirection
+    redirect_response = client.get(f"/{short_key}", follow_redirects=False)
+    assert redirect_response.status_code == 307  # Or 308 depending on FastAPI version/config
+    assert "location" in redirect_response.headers
+    assert redirect_response.headers["location"] == "https://example.com/redirect_test"
