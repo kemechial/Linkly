@@ -87,8 +87,6 @@ def test_redirect_short_link():
     assert redirect_response.headers["location"] == "https://example.com/redirect_test"
     
 
-    
-
 def test_redirect_uses_cache():
     """Test that second redirect uses cache"""
     token = get_token()

@@ -24,7 +24,14 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
-    command: redis-server --appendonly yes --loglevel verbose
+    command: redis-server --loglevel debug
+
+  # Add this service to monitor Redis
+  redis-monitor:
+    image: redis:7-alpine
+    depends_on:
+      - redis
+    command: redis-cli -h redis MONITOR
 
 volumes:
   postgres_data:
