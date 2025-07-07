@@ -6,7 +6,13 @@ from app.routers import links, auth
 from app.dependencies import get_db
 from app import crud
 
+from . import models          # <<< ADD THIS: Import your models file
+from .database import engine # <<< ADD THIS: Import the database engine
+
+models.Base.metadata.create_all(bind=engine) # <<< ADD THIS
+
 app = FastAPI(title="Linkly API")
+
 
 app.include_router(auth.router)
 app.include_router(links.router)

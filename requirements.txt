@@ -1,17 +1,15 @@
 fastapi
-flask
-passlib[bcrypt]
-psycopg2-binary
-pydantic
-python-jose[cryptography]
-python-slugify
-redis
-requests
+psycopg2-binary  # Needed for PostgreSQL
 sqlalchemy
-uvicorn
-uvicorn[standard]
+passlib[bcrypt]  # For password hashing
+python-jose[cryptography]  # For JWT authentication
+python-slugify  # For creating URL slugs
+redis  # If you're using Redis, ensure Redis server is also configured
+requests  # For making HTTP requests
+uvicorn[standard]  # ASGI server for FastAPI
+pydantic
+python-multipart  # For handling form data
+pytest  # For testing
+httpx  # Optional, for async HTTP requests
+python-dotenv
 pydantic[email]
-python-multipart
-pytest
-httpx
-

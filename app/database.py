@@ -1,19 +1,25 @@
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, func, ForeignKey
-from sqlalchemy.orm import sessionmaker, relationship, declarative_base
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
 
-# Change this to your actual DB in production (for now, use SQLite)
-DATABASE_URL = "sqlite:///./linkly.db"
+# Load environment variables from a .env file
+load_dotenv()
 
-engine = create_engine(
-    DATABASE_URL, connect_args={"check_same_thread": False}  # Only needed for SQLite
-)
+# Use an environment variable for the database URL
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+# Create the database engine
+engine = create_engine(DATABASE_URL)
+
+# Create a configured "Session" class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+# Base class for declarative class definitions
 Base = declarative_base()
 
-
-from .database import SessionLocal
-
+# Dependency to get a database session
 def get_db():
     db = SessionLocal()
     try:
