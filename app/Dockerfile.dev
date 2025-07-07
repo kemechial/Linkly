@@ -12,6 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the script and the app code
 COPY ./wait-for-postgres.sh /app/wait-for-postgres.sh
 COPY ./app /app/app
+COPY ./tests /app/tests
+COPY ./pytest.ini /app/pytest.ini
 
 EXPOSE 8000
 

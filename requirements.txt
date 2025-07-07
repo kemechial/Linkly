@@ -13,3 +13,4 @@ pytest  # For testing
 httpx  # Optional, for async HTTP requests
 python-dotenv
 pydantic[email]
+fakeredis

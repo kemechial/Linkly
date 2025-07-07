@@ -1,0 +1,23 @@
+services:
+  test:
+    build:
+      context: .
+      dockerfile: app/Dockerfile.dev
+    environment:
+      - DATABASE_URL=postgresql://test:test@test-db:5432/test
+      - REDIS_URL=redis://test-redis:6379/0
+      - TESTING=true
+    depends_on:
+      - test-db
+      - test-redis
+    command: pytest -v
+
+  test-db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=test
+
+  test-redis:
+    image: redis:7-alpine
