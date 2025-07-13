@@ -70,6 +70,11 @@ Linkly is a modern URL shortening service built with FastAPI, featuring user aut
    docker compose logs redis
    ```
 
+5. Redis Monitoring Visualization:
+   When running the command `docker compose logs -f redis-monitor`, you can see the Redis operations in real-time. Here's a sample visualization of Redis monitoring:
+
+   ![Redis Monitoring](pngs/redis.png)
+
 The API will be available at `http://localhost:8000`. You can access the interactive API documentation at `http://localhost:8000/docs`.
 
 ### Running Tests
@@ -235,6 +240,10 @@ Linkly/
    ```
 
 ## Testing
+
+Here's a visualization of the test execution and coverage:
+
+![Test Execution and Coverage](pngs/tests.png)
 
 The project includes comprehensive tests covering:
 - User authentication
