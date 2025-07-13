@@ -33,6 +33,17 @@ def get_link_stats(db: Session, short_key: str):
         return None
     return link
 
+def get_link_and_increment_clicks(db: Session, short_key: str):
+    db_link = db.query(models.Link).filter_by(short_key=short_key).first()
+    if not db_link:
+        return None
+
+    # Increment clicks
+    db_link.clicks += 1
+    db.commit()
+    db.refresh(db_link)
+    return db_link
+
 
 
 

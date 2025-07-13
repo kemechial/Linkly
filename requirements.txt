@@ -10,6 +10,7 @@ uvicorn[standard]  # ASGI server for FastAPI
 pydantic
 python-multipart  # For handling form data
 pytest  # For testing
+pytest-cov  # For test coverage reporting
 httpx  # Optional, for async HTTP requests
 python-dotenv
 pydantic[email]

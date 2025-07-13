@@ -6,7 +6,9 @@ from functools import lru_cache
 
 class RedisClient:
     def __init__(self):
-        self.redis_url = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+        host = os.getenv("REDIS_HOST", "localhost")
+        port = int(os.getenv("REDIS_PORT", "6379"))
+        self.redis_url = f"redis://{host}:{port}/0"
         self.client: Optional[aioredis.Redis] = None
         
     async def get_client(self) -> aioredis.Redis:
