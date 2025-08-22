@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, func, ForeignKey
 from sqlalchemy.orm import relationship
-from .database import Base
+from app.database import Base
 
 class User(Base):
     __tablename__ = "users"
@@ -24,7 +24,7 @@ class Link(Base):
     owner = relationship("User", back_populates="links")
 
 if __name__ == "__main__":
-    from .database import engine
+    from app.database import engine
     print("Creating all tables...")
     Base.metadata.create_all(bind=engine)
     print("Done!")

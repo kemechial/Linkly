@@ -27,7 +27,8 @@ Linkly is a modern URL shortening service built with FastAPI, featuring user aut
 - Docker and Docker Compose
 - Python 3.11+ (for local development)
 
-### Running with Docker
+
+### Running with Docker & Makefile
 
 1. Clone the repository:
    ```bash
@@ -35,84 +36,79 @@ Linkly is a modern URL shortening service built with FastAPI, featuring user aut
    cd Linkly
    ```
 
-2. Start all services (API, PostgreSQL, Redis):
+2. Build and start all services (API, PostgreSQL, Redis) using Makefile:
    ```bash
-   # Start in detached mode
-   docker compose up -d
+   # Build Docker images
+   make build
 
-   # Start with logs
-   docker compose up
+   # Start all services in detached mode
+   make up
 
-   # Start and rebuild containers
-   docker compose up --build
+   # Stop all services
+   make down
    ```
 
-3. Stop services:
+3. View logs:
    ```bash
-   # Graceful shutdown
-   docker compose down
-
-   # Remove volumes (will delete database data)
-   docker compose down -v
+   make logs
    ```
 
-4. View logs:
+4. Development server:
    ```bash
-   # View all logs
-   docker compose logs
-
-   # Follow logs
-   docker compose logs -f
-
-   # View specific service logs
-   docker compose logs api
-   docker compose logs db
-   docker compose logs redis
+   make dev
    ```
 
 5. Redis Monitoring Visualization:
-   When running the command `docker compose logs -f redis-monitor`, you can see the Redis operations in real-time. Here's a sample visualization of Redis monitoring:
-
    ![Redis Monitoring](pngs/redis.png)
 
 The API will be available at `http://localhost:8000`. You can access the interactive API documentation at `http://localhost:8000/docs`.
 
+
 ### Running Tests
 
-1. Run all tests with coverage:
-   ```bash
-   docker compose -f docker-compose.test.yaml up --build
-   ```
+All tests and code quality checks are run inside Docker containers using the Makefile for consistency and production parity.
 
-2. Run specific test files:
-   ```bash
-   # Run a specific test file
-   docker compose -f docker-compose.test.yaml run test pytest tests/test_endpoints.py
+**Common test commands:**
 
-   # Run a specific test function
-   docker compose -f docker-compose.test.yaml run test pytest tests/test_endpoints.py::test_signup
-   ```
+```bash
+# Run all tests
+make test
 
-3. Test options:
-   ```bash
-   # Run tests with verbose output
-   docker compose -f docker-compose.test.yaml run test pytest -v
+# Run unit tests only
+make test-unit
 
-   # Run tests and stop on first failure
-   docker compose -f docker-compose.test.yaml run test pytest -x
+# Run integration tests only
+make test-integration
 
-   # Run tests with print statements
-   docker compose -f docker-compose.test.yaml run test pytest -s
-   ```
+# Run end-to-end tests
+make test-e2e
 
-4. Coverage options:
-   ```bash
-   # Generate HTML coverage report
-   docker compose -f docker-compose.test.yaml run test pytest --cov=app --cov-report=html
+# Run tests with coverage report
+make test-coverage
 
-   # Show missing lines in coverage
-   docker compose -f docker-compose.test.yaml run test pytest --cov=app --cov-report=term-missing
-   ```
+# Run tests in watch mode
+make test-watch
+
+# Run performance tests
+make test-performance
+
+# Run all code quality checks
+make lint
+
+# Format code
+make format
+
+# Check code formatting
+make format-check
+
+# Run security checks
+make security
+
+# Run type checking
+make type-check
+```
+
+For a detailed guide on the testing infrastructure, test types, automation, and CI/CD, see the [Testing Guide](./TESTING_GUIDE.md).
 
 ## API Endpoints
 
@@ -239,9 +235,8 @@ Linkly/
    docker compose exec redis redis-cli FLUSHALL
    ```
 
-## Testing
 
-Here's a visualization of the test execution and coverage:
+## Testing
 
 ![Test Execution and Coverage](pngs/tests.png)
 
@@ -252,6 +247,13 @@ The project includes comprehensive tests covering:
 - Click tracking and analytics
 
 Current test coverage: 83%
+
+See the [Testing Guide](./TESTING_GUIDE.md) for:
+- Test architecture and structure
+- Makefile and automation commands
+- CI/CD pipeline details
+- Code quality and performance testing
+
 
 ## Contributing
 

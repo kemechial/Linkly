@@ -1,11 +1,9 @@
 from typing import Optional, Dict
 import json
 from app.redis_config import get_sync_redis_client
-import logging
+from app.logging_config import get_logger
 
-# Configure logger with more detail
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = get_logger("redis_cache")
 
 class LinkCache:
     def __init__(self):

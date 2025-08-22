@@ -1,0 +1,69 @@
+# Development and Testing Requirements
+# Extends production requirements with testing and development tools
+
+-r requirements-prod.txt
+
+# Testing Framework
+pytest==7.2.2  # Compatible with tavern
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+pytest-xdist==3.5.0  # Parallel test execution
+pytest-mock==3.12.0
+pytest-benchmark==4.0.0  # Performance testing
+pytest-html==4.1.1  # HTML test reports
+pytest-json-report==1.5.0  # JSON test reports
+
+# Test Data and Mocking
+factory-boy==3.3.0
+faker==20.1.0
+responses==0.24.1  # HTTP mocking
+freezegun==1.2.2  # Time mocking
+fakeredis==2.20.1
+
+# Load Testing
+locust==2.17.0
+# Note: Artillery is a Node.js tool, install separately if needed
+
+# Code Quality
+black==23.11.0
+isort==5.12.0
+flake8==5.0.4  # Compatible with prospector
+flake8-docstrings==1.7.0
+flake8-import-order==0.18.2
+mypy==1.7.1
+bandit==1.7.5  # Security linting
+pre-commit==3.6.0
+
+# Documentation
+sphinx==7.2.6
+sphinx-rtd-theme==1.3.0
+mkdocs==1.5.3
+mkdocs-material==9.4.8
+
+# Development Tools
+ipython==8.17.2
+ipdb==0.13.13  # Enhanced debugger
+watchdog==3.0.0  # File watching
+python-dotenv==1.0.0
+
+# Monitoring and Profiling
+py-spy==0.3.14  # Profiling
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# API Testing
+httpx==0.25.2
+tavern==2.2.0  # API testing framework - compatible with pytest 7.2.2
+
+# Database Testing
+pytest-postgresql==5.0.0
+sqlalchemy-utils==0.41.1
+
+# Container Testing
+testcontainers==3.7.1
+
+# Static Analysis
+prospector==1.10.3  # Compatible with flake8 5.x
+pylint==3.0.3
+vulture==2.10  # Dead code detection
+radon==6.0.1  # Code complexity

@@ -13,7 +13,9 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - TEST_MODE=True
-    command: ["pytest", "-v", "--cov=app", "--cov-report=term-missing"]
+      - SECRET_KEY=test-secret-key-for-testing-only-not-for-production
+      - DEBUG=true
+      - ENVIRONMENT=test
 
   db:
     image: postgres:13
